@@ -13,7 +13,7 @@ namespace SortingApp
         /// <summary>
         /// Количество элементов в массиве
         /// </summary>
-        private const int N = 9000;
+        private const int N = 3000;
         /// <summary>
         /// Коэффициенты для Burr
         /// </summary>
