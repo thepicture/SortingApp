@@ -97,7 +97,7 @@ namespace SortingApp
             HeapSort(heapSorted);
 
             OutputTextBox1.Text = "Быстрая сортировка: " + string.Join(", ", quickSorted.Take(50)) + "...\n";
-            OutputTextBox2.Text = "Сортиовка слиянием: " + string.Join(", ", mergeSorted.Take(50)) + "...\n";
+            OutputTextBox2.Text = "Сортировка слиянием: " + string.Join(", ", mergeSorted.Take(50)) + "...\n";
             OutputTextBox3.Text = "Пирамидальная сортировка: " + string.Join(", ", heapSorted.Take(50)) + "...";
         }
 
@@ -311,9 +311,7 @@ namespace SortingApp
         /// <param name="b">Второй элемент</param>
         private void Swap(ref double a, ref double b)
         {
-            double temp = a;
-            a = b;
-            b = temp;
+            (b, a) = (a, b);
         }
     }
 }
