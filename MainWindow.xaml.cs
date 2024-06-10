@@ -15,7 +15,7 @@ namespace SortingApp
         /// </summary>
         private const int N = 9000;
         /// <summary>
-        /// 
+        /// Коэффициенты для Burr
         /// </summary>
         private const double c = 2.0;
         private const double k = 5.0;
@@ -26,12 +26,27 @@ namespace SortingApp
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Генерация случайных чисел методом Burr
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GenerateArrayButton_Click(object sender, RoutedEventArgs e)
         {
             array = GenerateBurrDistributionArray(N, c, k, lambda);
-            OutputTextBox.Text = string.Join(", ", array.Take(50)) + "...";
+            OutputTextBox1.Text = string.Join(", ", array.Take(50)) + "...";
+            OutputTextBox2.Text = string.Join(", ", array.Take(50)) + "...";
+            OutputTextBox3.Text = string.Join(", ", array.Take(50)) + "...";
         }
 
+        /// <summary>
+        /// Генерация распределения методом Burr
+        /// </summary>
+        /// <param name="size">Размер Т</param>
+        /// <param name="c">Коэффициент C</param>
+        /// <param name="k">Коэффициент k</param>
+        /// <param name="lambda">Коэффициент lambda</param>
+        /// <returns>Массив чисел, сгенерированный методом Burr</returns>
         private double[] GenerateBurrDistributionArray(int size, double c, double k, double lambda)
         {
             Random rand = new Random();
@@ -44,6 +59,9 @@ namespace SortingApp
             return result;
         }
 
+        /// <summary>
+        /// Обработка простых методов сортировки и вывод на экран
+        /// </summary>
         private void SimpleSortButton_Click(object sender, RoutedEventArgs e)
         {
             if (array == null) return;
@@ -57,11 +75,14 @@ namespace SortingApp
             var insertionSorted = (double[])array.Clone();
             InsertionSort(insertionSorted);
 
-            OutputTextBox.Text = "Bubble Sort: " + string.Join(", ", bubbleSorted.Take(50)) + "...\n";
-            OutputTextBox.Text += "Selection Sort: " + string.Join(", ", selectionSorted.Take(50)) + "...\n";
-            OutputTextBox.Text += "Insertion Sort: " + string.Join(", ", insertionSorted.Take(50)) + "...";
+            OutputTextBox1.Text = "Сортировка пузырьком: " + string.Join(", ", bubbleSorted.Take(50)) + "...\n";
+            OutputTextBox2.Text = "Сортировка выборкой: " + string.Join(", ", selectionSorted.Take(50)) + "...\n";
+            OutputTextBox3.Text = "Сортировка вставкой: " + string.Join(", ", insertionSorted.Take(50)) + "...";
         }
 
+        /// <summary>
+        /// Обработка сложных методов сортировка и вывод на экран
+        /// </summary>
         private void ComplexSortButton_Click(object sender, RoutedEventArgs e)
         {
             if (array == null) return;
@@ -75,12 +96,15 @@ namespace SortingApp
             var heapSorted = (double[])array.Clone();
             HeapSort(heapSorted);
 
-            OutputTextBox.Text = "Quick Sort: " + string.Join(", ", quickSorted.Take(50)) + "...\n";
-            OutputTextBox.Text += "Merge Sort: " + string.Join(", ", mergeSorted.Take(50)) + "...\n";
-            OutputTextBox.Text += "Heap Sort: " + string.Join(", ", heapSorted.Take(50)) + "...";
+            OutputTextBox1.Text = "Быстрая сортировка: " + string.Join(", ", quickSorted.Take(50)) + "...\n";
+            OutputTextBox2.Text = "Сортиовка слиянием: " + string.Join(", ", mergeSorted.Take(50)) + "...\n";
+            OutputTextBox3.Text = "Пирамидальная сортировка: " + string.Join(", ", heapSorted.Take(50)) + "...";
         }
 
-        // Реализация простых сортировок
+        /// <summary>
+        /// Сортировка пузырьком
+        /// </summary>
+        /// <param name="array">Входной массив</param>
         private void BubbleSort(double[] array)
         {
             for (int i = 0; i < array.Length - 1; i++)
@@ -95,6 +119,10 @@ namespace SortingApp
             }
         }
 
+        /// <summary>
+        /// Сортировка выборкой
+        /// </summary>
+        /// <param name="array">Входной массив</param>
         private void SelectionSort(double[] array)
         {
             for (int i = 0; i < array.Length - 1; i++)
@@ -111,6 +139,10 @@ namespace SortingApp
             }
         }
 
+        /// <summary>
+        /// Сортировка вставкой
+        /// </summary>
+        /// <param name="array">Входной массив</param>
         private void InsertionSort(double[] array)
         {
             for (int i = 1; i < array.Length; i++)
@@ -126,7 +158,12 @@ namespace SortingApp
             }
         }
 
-        // Реализация сложных сортировок
+        /// <summary>
+        /// Быстрая сортирвока
+        /// </summary>
+        /// <param name="array">Входной массив</param>
+        /// <param name="left">Элемент слева</param>
+        /// <param name="right">Элемент справа</param>
         private void QuickSort(double[] array, int left, int right)
         {
             if (left < right)
@@ -137,6 +174,13 @@ namespace SortingApp
             }
         }
 
+        /// <summary>
+        /// Деление массива по принципу "разделяй и властвуй"
+        /// </summary>
+        /// <param name="array">Массив для деления</param>
+        /// <param name="left">Элемент слева</param>
+        /// <param name="right">Элемент справа</param>
+        /// <returns>Следующий центральный элемент</returns>
         private int Partition(double[] array, int left, int right)
         {
             double pivot = array[right];
@@ -153,6 +197,12 @@ namespace SortingApp
             return i + 1;
         }
 
+        /// <summary>
+        /// Сортировка массива слиянием
+        /// </summary>
+        /// <param name="array">Входной</param>
+        /// <param name="left">Левый элемент</param>
+        /// <param name="right">Правый элемент</param>
         private void MergeSort(double[] array, int left, int right)
         {
             if (left < right)
@@ -164,6 +214,13 @@ namespace SortingApp
             }
         }
 
+        /// <summary>
+        /// Сортировка слиянием
+        /// </summary>
+        /// <param name="array">Входной массив</param>
+        /// <param name="left">Элемент слева</param>
+        /// <param name="mid">Центральный элемент</param>
+        /// <param name="right">Элемент справа</param>
         private void Merge(double[] array, int left, int mid, int right)
         {
             int n1 = mid - left + 1;
@@ -206,6 +263,10 @@ namespace SortingApp
             }
         }
 
+        /// <summary>
+        /// Пирамидальная сортировка
+        /// </summary>
+        /// <param name="array">Входной массив</param>
         private void HeapSort(double[] array)
         {
             int n = array.Length;
@@ -218,6 +279,12 @@ namespace SortingApp
             }
         }
 
+        /// <summary>
+        /// Алгоритм пирамидальной сортировки
+        /// </summary>
+        /// <param name="array">Входной массив</param>
+        /// <param name="n">Число</param>
+        /// <param name="i">Наибольшее число</param>
         private void Heapify(double[] array, int n, int i)
         {
             int largest = i;
@@ -237,6 +304,11 @@ namespace SortingApp
             }
         }
 
+        /// <summary>
+        /// Меняет два элемнта местами
+        /// </summary>
+        /// <param name="a">Первый элемент</param>
+        /// <param name="b">Второй элемент</param>
         private void Swap(ref double a, ref double b)
         {
             double temp = a;
