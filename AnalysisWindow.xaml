@@ -1,0 +1,311 @@
+﻿<Window x:Class="SortingApp.AnalysisWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+        mc:Ignorable="d"
+        Title="Анализ алгоритма с экспериментальными данными"
+        Height="700"
+        Width="1000"
+        MinWidth="700"
+        MinHeight="700"
+        WindowStartupLocation="CenterScreen"
+        Background="MediumPurple"
+        Icon="/alphabetical_sorting-48_46595.ico">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background"
+                    Value="Orange" />
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin"
+                    Value="5" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+        <Style TargetType="WindowsFormsHost">
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+    </Window.Resources>
+    <UniformGrid Rows="2">
+        <UniformGrid Columns="3">
+            <GroupBox Header="Действия">
+                <StackPanel>
+                    <Button Content="Рассчитать экспериментальные данные"
+                            Click="CalculateExperimentalRows_Click" />
+                    <Button Content="Заполнить график"
+                            Click="BuildChart_Click" />
+                    <Button Content="Проанализировать"
+                            Click="Analyze_Click" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="График на основе таблицы">
+                <WindowsFormsHost>
+                    <charts:Chart x:Name="AnalysisChart">
+                        <charts:Chart.Legends>
+                            <charts:Legend />
+                        </charts:Chart.Legends>
+                        <charts:Chart.ChartAreas>
+                            <charts:ChartArea Name="MainArea" />
+                        </charts:Chart.ChartAreas>
+                        <charts:Chart.Series>
+                            <charts:Series Name="f(x)"
+                                           ChartType="FastLine" />
+                        </charts:Chart.Series>
+                    </charts:Chart>
+                </WindowsFormsHost>
+            </GroupBox>
+            <GroupBox Header="Анализ выбранной сортировки">
+                <StackPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   Width="150"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">Парный коэффициент корреляции X и Y=</TextBlock>
+                        <TextBox Name="ParityCorrelationBox"
+                                 IsReadOnly="True"
+                                 Grid.Column="1" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   Width="150"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">Совокупный коэффициент детерминации R²=</TextBlock>
+                        <TextBox Name="DeterminationCoefficientBox"
+                                 IsReadOnly="True"
+                                 Grid.Column="1" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   Width="120"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">Средняя квадратическая ошибка объёма выборки X=</TextBlock>
+                        <TextBox Name="ErrorBox"
+                                 IsReadOnly="True"
+                                 Grid.Column="1" />
+                    </Grid>
+                    <TextBox Text="Коэффициент корреляции ещё не рассчитан"
+                             TextWrapping="Wrap"
+                             IsReadOnly="True"
+                             Height="100" />
+                    <GroupBox Header="Уравнение связи">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">y=</TextBlock>
+                            <TextBox Name="RelationEquationA0"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">+</TextBlock>
+                            <TextBox Name="RelationEquationA1"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">*x1</TextBlock>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+        </UniformGrid>
+        <UniformGrid Columns="2">
+            <DataGrid Name="ExperimentalGrid"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер итерации"
+                                        Binding="{Binding Number}"
+                                        Width="auto" />
+                    <DataGridTextColumn Header="Число элементов (X)"
+                                        Binding="{Binding ElementCount}"
+                                        Width="auto" />
+                    <DataGridTextColumn Header="Время (Y)"
+                                        Binding="{Binding TimeInMs}"
+                                        Width="*" />
+                    <DataGridTextColumn Header="X²"
+                                        Binding="{Binding SquaredX}"
+                                        Width="*" />
+                    <DataGridTextColumn Header="X·Y"
+                                        Binding="{Binding XY}"
+                                        Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <UniformGrid Columns="2">
+                <GroupBox Header="Система уравнений">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">A0*</TextBlock>
+                            <TextBox Name="FirstEqA0"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">+A1*</TextBlock>
+                            <TextBox Name="FirstEqA1"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">=</TextBlock>
+                            <TextBox Name="FirstEqResult"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">A0*</TextBlock>
+                            <TextBox Name="SecondEqA0"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">+A1*</TextBlock>
+                            <TextBox Name="SecondEqA1"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">=</TextBlock>
+                            <TextBox Name="SecondEqResult"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">A0=</TextBlock>
+                            <TextBox Name="A0Result"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"
+                                       FontSize="8"
+                                       Margin="5"
+                                       Padding="5">A1=</TextBlock>
+                            <TextBox Name="A1Result"
+                                     IsReadOnly="True"
+                                     Width="30"
+                                     Grid.Column="1" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Матрица">
+                    <UniformGrid Rows="10"
+                                 Columns="3">
+                        <TextBox Name="MatrixA0Eq1"
+                                 IsReadOnly="True" />
+                        <TextBox Name="MatrixA1Eq1"
+                                 IsReadOnly="True" />
+                        <TextBox Name="MatrixResultEq1"
+                                 IsReadOnly="True" />
+                        <TextBox Name="MatrixA0Eq2"
+                                 IsReadOnly="True" />
+                        <TextBox Name="MatrixA1Eq2"
+                                 IsReadOnly="True" />
+                        <TextBox Name="MatrixResultEq2"
+                                 IsReadOnly="True" />
+                    </UniformGrid>
+                </GroupBox>
+            </UniformGrid>
+        </UniformGrid>
+    </UniformGrid>
+</Window>

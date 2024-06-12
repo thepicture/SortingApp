@@ -5,86 +5,264 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Алгоритмы сортировки данных в оперативной памяти"
-        Height="450"
-        Width="700"
+        Height="700"
+        Width="1000"
         MinWidth="700"
-        MinHeight="450"
-        ResizeMode="NoResize"
+        MinHeight="700"
         WindowStartupLocation="CenterScreen"
-        Background="Orange">
+        Background="Orange"
+        Icon="/alphabetical_sorting-48_46595.ico">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background"
                     Value="Yellow" />
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin"
+                    Value="5" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Margin"
+                    Value="5" />
         </Style>
     </Window.Resources>
     <Grid>
-        <Button x:Name="GenerateArrayButton"
-                Content="Генерация массива"
-                HorizontalAlignment="Left"
-                Margin="10,10,0,0"
-                VerticalAlignment="Top"
-                Click="GenerateArrayButton_Click" />
-        <Button x:Name="SimpleSortButton"
-                Content="Простая сортировка"
-                HorizontalAlignment="Left"
-                Margin="10,50,0,0"
-                VerticalAlignment="Top"
-                Click="SimpleSortButton_Click" />
-        <Button x:Name="ComplexSortButton"
-                Content="Сложная сортировка"
-                HorizontalAlignment="Left"
-                Margin="10,90,0,0"
-                VerticalAlignment="Top"
-                Click="ComplexSortButton_Click" />
-        <Label Content="Quick Sort"
-               Margin="156,0,20,0" />
-        <Label Content="Merge Sort"
-               Margin="390,0,0,0" />
-        <Label Content="Heap Sort"
-               Margin="160,130,16,0" />
-        <TextBox x:Name="OutputTextBox1"
-                 HorizontalAlignment="Left"
-                 Margin="162,25,0,0"
-                 VerticalAlignment="Top"
-                 Width="169"
-                 Height="101"
-                 TextWrapping="Wrap"
-                 AcceptsReturn="True" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="Провести анализ"
+                      Click="OpenAnalysisWindow_Click" />
+            <MenuItem Header="Выход"
+                      Click="Exit_Click" />
+        </Menu>
+        <UniformGrid Rows="2"
+                     Columns="2"
+                     Grid.Row="1">
+            <Grid>
+                <GroupBox Header="Входные данные">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"
+                                       Margin="5"
+                                       Padding="5">N=</TextBlock>
+                            <TextBox Name="N"
+                                     Grid.Column="1"
+                                     Text="3000" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"
+                                       Margin="5"
+                                       Padding="5">c=</TextBlock>
+                            <TextBox Name="C"
+                                     Grid.Column="1" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"
+                                       Margin="5"
+                                       Padding="5">k=</TextBlock>
+                            <TextBox Name="K"
+                                     Grid.Column="1" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"
+                                       Margin="5"
+                                       Padding="5">λ=</TextBlock>
+                            <TextBox Name="Lambda"
+                                     Grid.Column="1" />
+                        </Grid>
+                        <UniformGrid Rows="2"
+                                     Columns="2">
+                            <Button Content="Отсортировать"
+                                    Click="Sort_Click" />
+                            <Button Content="Проанализировать методы"
+                                    Click="Analyze_Click" />
+                            <Button Content="Очистить поля"
+                                    Click="Clear_Click" />
+                            <Button Content="Выйти"
+                                    Click="Exit_Click" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <GroupBox Header="Распределение Берра">
+                                <Image Source="/burr.png" />
+                            </GroupBox>
+                            <GroupBox Header="Обратная функция распределения">
+                                <Image Source="/cdr.png" />
+                            </GroupBox>
+                        </UniformGrid>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+            <UniformGrid Rows="2">
+                <GroupBox Header="Метод сортировки">
+                    <UniformGrid Columns="2">
+                        <StackPanel>
+                            <RadioButton Content="Сортировка пузырьком"
+                                         GroupName="sortType"
+                                         IsChecked="True"
+                                         Name="BubbleSortRadio" />
+                            <RadioButton Content="Сортировка выборкой"
+                                         GroupName="sortType"
+                                         Name="SelectionSortRadio" />
+                            <RadioButton Content="Сортировка вставкой"
+                                         GroupName="sortType"
+                                         Name="InsertSortRadio" />
+                        </StackPanel>
+                        <StackPanel>
+                            <RadioButton Content="Быстрая сортировка"
+                                         GroupName="sortType"
+                                         Name="QuickSortRadio" />
+                            <RadioButton Content="Сортировка слиянием"
+                                         GroupName="sortType"
+                                         Name="MergeSortRadio" />
+                            <RadioButton Content="Пирамидальная сортировка"
+                                         GroupName="sortType"
+                                         Name="HeapSortRadio" />
+                        </StackPanel>
+                    </UniformGrid>
+                </GroupBox>
+                <GroupBox Header="Характеристики результата">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="170" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"
+                                       Margin="5"
+                                       Padding="5">Время сортировки (мс)=</TextBlock>
+                            <TextBox Name="SortTimeInMsBox"
+                                     Grid.Column="1" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"
+                                       Margin="5"
+                                       Padding="5">Число сравнений=</TextBlock>
+                            <TextBox Name="ComparisonCountBox"
+                                     Grid.Column="1" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Background="White"
+                                       FontStyle="Italic"
+                                       FontWeight="Bold"
+                                       TextAlignment="Center"
+                                       Margin="5"
+                                       Padding="5">Число перестановок=</TextBlock>
+                            <TextBox Name="PermutationCountBox"
+                                     Grid.Column="1"
+                                     IsReadOnly="True" />
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+            </UniformGrid>
 
-        <Image HorizontalAlignment="Left"
-               Height="58"
-               Margin="10,328,0,0"
-               VerticalAlignment="Top"
-               Width="234"
-               Source="/burr.png" />
-        <Image HorizontalAlignment="Left"
-               Height="71"
-               Margin="259,314,0,0"
-               VerticalAlignment="Top"
-               Width="234"
-               Source="/cdr.png" />
-        <TextBox x:Name="OutputTextBox2"
-                 HorizontalAlignment="Left"
-                 Margin="395,25,0,0"
-                 VerticalAlignment="Top"
-                 Width="169"
-                 Height="101"
-                 TextWrapping="Wrap"
-                 AcceptsReturn="True" />
-        <TextBox x:Name="OutputTextBox3"
-                 HorizontalAlignment="Left"
-                 Margin="163,0,0,0"
-                 VerticalAlignment="Center"
-                 Width="169"
-                 Height="101"
-                 TextWrapping="Wrap"
-                 AcceptsReturn="True" />
-        <Image HorizontalAlignment="Left"
-               Height="146"
-               Margin="339,155,0,0"
-               VerticalAlignment="Top"
-               Width="341"
-               Source="/ways.png" />
+            <GroupBox Header="Массивы">
+                <UniformGrid Columns="2">
+                    <GroupBox Header="Исходный массив">
+                        <DataGrid Name="OriginalArrayGrid"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*"
+                                                    Header="Номер"
+                                                    Binding="{Binding Number}" />
+                                <DataGridTextColumn Width="*"
+                                                    Header="Элемент"
+                                                    Binding="{Binding Value}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                    <GroupBox Header="Упорядоченный массив">
+                        <DataGrid Name="SortedArrayGrid"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*"
+                                                    Header="Номер"
+                                                    Binding="{Binding Number}" />
+                                <DataGridTextColumn Width="*"
+                                                    Header="Элемент"
+                                                    Binding="{Binding Value}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </UniformGrid>
+            </GroupBox>
+            <GroupBox Header="Анализ методов сортировки">
+                <DataGrid Name="AnalysisGrid"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Метод"
+                                            Binding="{Binding MethodName}"
+                                            Width="auto" />
+                        <DataGridTextColumn Header="Время (мс)"
+                                            Binding="{Binding TimeInMs}"
+                                            Width="*" />
+                        <DataGridTextColumn Header="Сравнения"
+                                            Binding="{Binding ComparisonCount}"
+                                            Width="*" />
+                        <DataGridTextColumn Header="Перестановки"
+                                            Binding="{Binding PermutationCount}"
+                                            Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </UniformGrid>
     </Grid>
 </Window>
