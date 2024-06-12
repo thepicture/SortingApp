@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace SortingApp
@@ -118,7 +120,36 @@ namespace SortingApp
                 return;
             }
 
+            if (entries == null || entries.Count == 0) return;
 
+            double meanX = entries.Average(entry => entry.ElementCount);
+            double meanY = entries.Average(entry => entry.TimeInMs);
+
+            double sumXY = entries.Sum(entry => (entry.ElementCount - meanX) * (entry.TimeInMs - meanY));
+            double sumX2 = entries.Sum(entry => Math.Pow(entry.ElementCount - meanX, 2));
+            double sumY2 = entries.Sum(entry => Math.Pow(entry.TimeInMs - meanY, 2));
+
+            double r = sumXY / Math.Sqrt(sumX2 * sumY2);
+
+            double rSquared = Math.Pow(r, 2);
+
+            double slope = sumXY / sumX2;
+            double intercept = meanY - slope * meanX;
+
+            double mse = entries.Average(entry => Math.Pow(entry.TimeInMs - (slope * entry.ElementCount + intercept), 2));
+
+            ParityCorrelationBox.Text = r.ToString("F4");
+            DeterminationCoefficientBox.Text = rSquared.ToString("F4");
+            ErrorBox.Text = mse.ToString("F4");
+
+            string correlationStrength = "связь слабая";
+            if (Math.Abs(r) > 0.7)
+                correlationStrength = "связь сильная";
+
+            RelationEquationA0.Text = slope.ToString("F4");
+            RelationEquationA1.Text = intercept.ToString("F4");
+
+            CorrelationResultBox.Text = $"Коэффициент корреляции: {r:F4}\nСовокупный коэффициент детерминации R²: {rSquared:F4}\nСредняя квадратическая ошибка: {mse:F4}\nСила связи в пределах [0.8;1], поэтому {correlationStrength}\nУравнение связи: Y = {slope:F4}X + {intercept:F4}";
         }
     }
 }

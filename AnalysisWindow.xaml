@@ -88,7 +88,6 @@
                                    Margin="5"
                                    Padding="5">Парный коэффициент корреляции X и Y=</TextBlock>
                         <TextBox Name="ParityCorrelationBox"
-                                 IsReadOnly="True"
                                  Grid.Column="1" />
                     </Grid>
                     <Grid>
@@ -105,7 +104,6 @@
                                    Margin="5"
                                    Padding="5">Совокупный коэффициент детерминации R²=</TextBlock>
                         <TextBox Name="DeterminationCoefficientBox"
-                                 IsReadOnly="True"
                                  Grid.Column="1" />
                     </Grid>
                     <Grid>
@@ -122,12 +120,11 @@
                                    Margin="5"
                                    Padding="5">Средняя квадратическая ошибка объёма выборки X=</TextBlock>
                         <TextBox Name="ErrorBox"
-                                 IsReadOnly="True"
                                  Grid.Column="1" />
                     </Grid>
                     <TextBox Text="Коэффициент корреляции ещё не рассчитан"
                              TextWrapping="Wrap"
-                             IsReadOnly="True"
+                             Name="CorrelationResultBox"
                              Height="100" />
                     <GroupBox Header="Уравнение связи">
                         <StackPanel Orientation="Horizontal">
@@ -139,7 +136,6 @@
                                        Margin="5"
                                        Padding="5">y=</TextBlock>
                             <TextBox Name="RelationEquationA0"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                             <TextBlock Background="White"
@@ -150,7 +146,6 @@
                                        Margin="5"
                                        Padding="5">+</TextBlock>
                             <TextBox Name="RelationEquationA1"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                             <TextBlock Background="White"
@@ -199,7 +194,6 @@
                                        Margin="5"
                                        Padding="5">A0*</TextBlock>
                             <TextBox Name="FirstEqA0"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                             <TextBlock Background="White"
@@ -210,7 +204,6 @@
                                        Margin="5"
                                        Padding="5">+A1*</TextBlock>
                             <TextBox Name="FirstEqA1"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                             <TextBlock Background="White"
@@ -221,7 +214,6 @@
                                        Margin="5"
                                        Padding="5">=</TextBlock>
                             <TextBox Name="FirstEqResult"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                         </StackPanel>
@@ -234,7 +226,6 @@
                                        Margin="5"
                                        Padding="5">A0*</TextBlock>
                             <TextBox Name="SecondEqA0"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                             <TextBlock Background="White"
@@ -245,7 +236,6 @@
                                        Margin="5"
                                        Padding="5">+A1*</TextBlock>
                             <TextBox Name="SecondEqA1"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                             <TextBlock Background="White"
@@ -256,7 +246,6 @@
                                        Margin="5"
                                        Padding="5">=</TextBlock>
                             <TextBox Name="SecondEqResult"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                         </StackPanel>
@@ -269,7 +258,6 @@
                                        Margin="5"
                                        Padding="5">A0=</TextBlock>
                             <TextBox Name="A0Result"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                         </StackPanel>
@@ -282,7 +270,6 @@
                                        Margin="5"
                                        Padding="5">A1=</TextBlock>
                             <TextBox Name="A1Result"
-                                     IsReadOnly="True"
                                      Width="30"
                                      Grid.Column="1" />
                         </StackPanel>
@@ -291,18 +278,12 @@
                 <GroupBox Header="Матрица">
                     <UniformGrid Rows="10"
                                  Columns="3">
-                        <TextBox Name="MatrixA0Eq1"
-                                 IsReadOnly="True" />
-                        <TextBox Name="MatrixA1Eq1"
-                                 IsReadOnly="True" />
-                        <TextBox Name="MatrixResultEq1"
-                                 IsReadOnly="True" />
-                        <TextBox Name="MatrixA0Eq2"
-                                 IsReadOnly="True" />
-                        <TextBox Name="MatrixA1Eq2"
-                                 IsReadOnly="True" />
-                        <TextBox Name="MatrixResultEq2"
-                                 IsReadOnly="True" />
+                        <TextBox Name="MatrixA0Eq1" />
+                        <TextBox Name="MatrixA1Eq1" />
+                        <TextBox Name="MatrixResultEq1" />
+                        <TextBox Name="MatrixA0Eq2" />
+                        <TextBox Name="MatrixA1Eq2" />
+                        <TextBox Name="MatrixResultEq2" />
                     </UniformGrid>
                 </GroupBox>
             </UniformGrid>
