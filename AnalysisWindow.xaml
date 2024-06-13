@@ -66,6 +66,8 @@
                         </charts:Chart.ChartAreas>
                         <charts:Chart.Series>
                             <charts:Series Name="f(x)"
+                                           ChartType="Point" />
+                            <charts:Series Name="approx"
                                            ChartType="FastLine" />
                         </charts:Chart.Series>
                     </charts:Chart>

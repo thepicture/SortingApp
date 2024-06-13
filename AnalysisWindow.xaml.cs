@@ -182,6 +182,11 @@ namespace SortingApp
             RelationEquationA1.Text = intercept.ToString("F4");
 
             CorrelationResultBox.Text = $"Коэффициент корреляции: {r:F4}\nСовокупный коэффициент детерминации R²: {rSquared:F4}\nСредняя квадратическая ошибка: {mse:F4}\nСила связи в пределах [0.8;1], поэтому {correlationStrength}\nУравнение связи: Y = {slope:F4}X + {intercept:F4}";
+
+            for (int i = 1000; i < 100000; i+=1000)
+            {
+                AnalysisChart.Series[1].Points.AddXY(i, slope * i + intercept);
+            }
         }
     }
 }
