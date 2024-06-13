@@ -76,7 +76,7 @@ namespace SortingApp
             }
             else if (parentWindow.HeapSortRadio.IsChecked.HasValue && parentWindow.HeapSortRadio.IsChecked.Value)
             {
-                (sortedArray, comparisonCount, swapCount, timeInMs) = parentWindow.HeapSort((double[])parentWindow.array.Clone());
+                (sortedArray, comparisonCount, swapCount, timeInMs) = parentWindow.HeapSort((double[])array.Clone());
             }
             else
             {
