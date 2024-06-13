@@ -56,27 +56,27 @@ namespace SortingApp
 
             if (parentWindow.BubbleSortRadio.IsChecked.HasValue && parentWindow.BubbleSortRadio.IsChecked.Value)
             {
-                (sortedArray, comparisonCount, swapCount, timeInMs) = parentWindow.BubbleSort((double[])array.Clone());
+                (_, _, _, timeInMs) = parentWindow.BubbleSort((double[])array.Clone());
             }
             else if (parentWindow.SelectionSortRadio.IsChecked.HasValue && parentWindow.SelectionSortRadio.IsChecked.Value)
             {
-                (sortedArray, comparisonCount, swapCount, timeInMs) = parentWindow.SelectionSort((double[])array.Clone());
+                (_, _, _, timeInMs) = parentWindow.SelectionSort((double[])array.Clone());
             }
             else if (parentWindow.InsertSortRadio.IsChecked.HasValue && parentWindow.InsertSortRadio.IsChecked.Value)
             {
-                (sortedArray, comparisonCount, swapCount, timeInMs) = parentWindow.InsertionSort((double[])array.Clone());
+                (_, _, _, timeInMs) = parentWindow.InsertionSort((double[])array.Clone());
             }
             else if (parentWindow.QuickSortRadio.IsChecked.HasValue && parentWindow.QuickSortRadio.IsChecked.Value)
             {
-                (sortedArray, comparisonCount, swapCount, timeInMs) = parentWindow.QuickSort((double[])array.Clone());
+                (_, _, _, timeInMs) = parentWindow.QuickSort((double[])array.Clone());
             }
             else if (parentWindow.MergeSortRadio.IsChecked.HasValue && parentWindow.MergeSortRadio.IsChecked.Value)
             {
-                (sortedArray, comparisonCount, swapCount, timeInMs) = parentWindow.MergeSort((double[])array.Clone());
+                (_, _, _, timeInMs) = parentWindow.MergeSort((double[])array.Clone());
             }
             else if (parentWindow.HeapSortRadio.IsChecked.HasValue && parentWindow.HeapSortRadio.IsChecked.Value)
             {
-                (sortedArray, comparisonCount, swapCount, timeInMs) = parentWindow.HeapSort((double[])array.Clone());
+                (_, _, _, timeInMs) = parentWindow.HeapSort((double[])array.Clone());
             }
             else
             {
