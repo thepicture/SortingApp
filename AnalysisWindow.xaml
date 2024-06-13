@@ -137,6 +137,7 @@
                                        Padding="5">y=</TextBlock>
                             <TextBox Name="RelationEquationA0"
                                      Width="30"
+                                     FontSize="8"
                                      Grid.Column="1" />
                             <TextBlock Background="White"
                                        FontStyle="Italic"
@@ -147,6 +148,7 @@
                                        Padding="5">+</TextBlock>
                             <TextBox Name="RelationEquationA1"
                                      Width="30"
+                                     FontSize="8"
                                      Grid.Column="1" />
                             <TextBlock Background="White"
                                        FontStyle="Italic"
@@ -160,7 +162,12 @@
                 </StackPanel>
             </GroupBox>
         </UniformGrid>
-        <UniformGrid Columns="2">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2.5*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
             <DataGrid Name="ExperimentalGrid"
                       IsReadOnly="True"
                       AutoGenerateColumns="False">
@@ -168,12 +175,12 @@
                     <DataGridTextColumn Header="Номер итерации"
                                         Binding="{Binding Number}"
                                         Width="auto" />
-                    <DataGridTextColumn Header="Число элементов (X)"
+                    <DataGridTextColumn Header="Размер (X)"
                                         Binding="{Binding ElementCount}"
                                         Width="auto" />
                     <DataGridTextColumn Header="Время (Y)"
                                         Binding="{Binding TimeInMs}"
-                                        Width="*" />
+                                        Width="auto" />
                     <DataGridTextColumn Header="X²"
                                         Binding="{Binding SquaredX}"
                                         Width="*" />
@@ -182,111 +189,113 @@
                                         Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
-            <UniformGrid Columns="2">
-                <GroupBox Header="Система уравнений">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Background="White"
-                                       FontStyle="Italic"
-                                       TextWrapping="Wrap"
-                                       FontWeight="Bold"
-                                       FontSize="8"
-                                       Margin="5"
-                                       Padding="5">A0*</TextBlock>
-                            <TextBox Name="FirstEqA0"
-                                     Width="30"
-                                     Grid.Column="1" />
-                            <TextBlock Background="White"
-                                       FontStyle="Italic"
-                                       TextWrapping="Wrap"
-                                       FontWeight="Bold"
-                                       FontSize="8"
-                                       Margin="5"
-                                       Padding="5">+A1*</TextBlock>
-                            <TextBox Name="FirstEqA1"
-                                     Width="30"
-                                     Grid.Column="1" />
-                            <TextBlock Background="White"
-                                       FontStyle="Italic"
-                                       TextWrapping="Wrap"
-                                       FontWeight="Bold"
-                                       FontSize="8"
-                                       Margin="5"
-                                       Padding="5">=</TextBlock>
-                            <TextBox Name="FirstEqResult"
-                                     Width="30"
-                                     Grid.Column="1" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Background="White"
-                                       FontStyle="Italic"
-                                       TextWrapping="Wrap"
-                                       FontWeight="Bold"
-                                       FontSize="8"
-                                       Margin="5"
-                                       Padding="5">A0*</TextBlock>
-                            <TextBox Name="SecondEqA0"
-                                     Width="30"
-                                     Grid.Column="1" />
-                            <TextBlock Background="White"
-                                       FontStyle="Italic"
-                                       TextWrapping="Wrap"
-                                       FontWeight="Bold"
-                                       FontSize="8"
-                                       Margin="5"
-                                       Padding="5">+A1*</TextBlock>
-                            <TextBox Name="SecondEqA1"
-                                     Width="30"
-                                     Grid.Column="1" />
-                            <TextBlock Background="White"
-                                       FontStyle="Italic"
-                                       TextWrapping="Wrap"
-                                       FontWeight="Bold"
-                                       FontSize="8"
-                                       Margin="5"
-                                       Padding="5">=</TextBlock>
-                            <TextBox Name="SecondEqResult"
-                                     Width="30"
-                                     Grid.Column="1" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Background="White"
-                                       FontStyle="Italic"
-                                       TextWrapping="Wrap"
-                                       FontWeight="Bold"
-                                       FontSize="8"
-                                       Margin="5"
-                                       Padding="5">A0=</TextBlock>
-                            <TextBox Name="A0Result"
-                                     Width="30"
-                                     Grid.Column="1" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Background="White"
-                                       FontStyle="Italic"
-                                       TextWrapping="Wrap"
-                                       FontWeight="Bold"
-                                       FontSize="8"
-                                       Margin="5"
-                                       Padding="5">A1=</TextBlock>
-                            <TextBox Name="A1Result"
-                                     Width="30"
-                                     Grid.Column="1" />
-                        </StackPanel>
+            <GroupBox Header="Система уравнений"
+                      Grid.Column="1"
+                      FontSize="8">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">A0*</TextBlock>
+                        <TextBox Name="FirstEqA0"
+                                 Width="30"
+                                 Grid.Column="1" />
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">+A1*</TextBlock>
+                        <TextBox Name="FirstEqA1"
+                                 Width="30"
+                                 Grid.Column="1" />
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">=</TextBlock>
+                        <TextBox Name="FirstEqResult"
+                                 Width="30"
+                                 Grid.Column="1" />
                     </StackPanel>
-                </GroupBox>
-                <GroupBox Header="Матрица">
-                    <UniformGrid Rows="10"
-                                 Columns="3">
-                        <TextBox Name="MatrixA0Eq1" />
-                        <TextBox Name="MatrixA1Eq1" />
-                        <TextBox Name="MatrixResultEq1" />
-                        <TextBox Name="MatrixA0Eq2" />
-                        <TextBox Name="MatrixA1Eq2" />
-                        <TextBox Name="MatrixResultEq2" />
-                    </UniformGrid>
-                </GroupBox>
-            </UniformGrid>
-        </UniformGrid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">A0*</TextBlock>
+                        <TextBox Name="SecondEqA0"
+                                 Width="30"
+                                 Grid.Column="1" />
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">+A1*</TextBlock>
+                        <TextBox Name="SecondEqA1"
+                                 Width="30"
+                                 Grid.Column="1" />
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">=</TextBlock>
+                        <TextBox Name="SecondEqResult"
+                                 Width="30"
+                                 Grid.Column="1" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">A0=</TextBlock>
+                        <TextBox Name="A0Result"
+                                 Width="30"
+                                 Grid.Column="1" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Background="White"
+                                   FontStyle="Italic"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Bold"
+                                   FontSize="8"
+                                   Margin="5"
+                                   Padding="5">A1=</TextBlock>
+                        <TextBox Name="A1Result"
+                                 Width="30"
+                                 Grid.Column="1" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Матрица"
+                      FontSize="9"
+                      Grid.Column="2">
+                <UniformGrid Rows="10"
+                             Columns="3">
+                    <TextBox Name="MatrixA0Eq1" />
+                    <TextBox Name="MatrixA1Eq1" />
+                    <TextBox Name="MatrixResultEq1" />
+                    <TextBox Name="MatrixA0Eq2" />
+                    <TextBox Name="MatrixA1Eq2" />
+                    <TextBox Name="MatrixResultEq2" />
+                </UniformGrid>
+            </GroupBox>
+        </Grid>
     </UniformGrid>
 </Window>

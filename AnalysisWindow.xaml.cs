@@ -106,6 +106,9 @@ namespace SortingApp
             });
         }
 
+        /// <summary>
+        /// Анализирует экспериментальные данные на основе матрицы и системы уравнений.
+        /// </summary>
         private void Analyze_Click(object sender, RoutedEventArgs e)
         {
             if (entries.Count == 0)
@@ -127,7 +130,34 @@ namespace SortingApp
 
             double sumXY = entries.Sum(entry => (entry.ElementCount - meanX) * (entry.TimeInMs - meanY));
             double sumX2 = entries.Sum(entry => Math.Pow(entry.ElementCount - meanX, 2));
+
             double sumY2 = entries.Sum(entry => Math.Pow(entry.TimeInMs - meanY, 2));
+
+            int n = entries.Count;
+            double sumX = entries.Sum(entry => entry.ElementCount);
+            double sumY = entries.Sum(entry => entry.TimeInMs);
+
+            double[,] augmentedMatrix = new double[2, 3]
+            {
+                { n, sumX, sumY },
+                { sumX, sumX2, sumXY }
+            };
+
+            MatrixA0Eq1.Text = n.ToString("F4");
+            MatrixA1Eq1.Text = sumX.ToString("F4");
+            MatrixResultEq1.Text = sumY.ToString("F4");
+
+            MatrixA0Eq2.Text = sumX.ToString("F4");
+            MatrixA1Eq2.Text = sumX2.ToString("F4");
+            MatrixResultEq2.Text = sumXY.ToString("F4");
+
+            FirstEqA0.Text = n.ToString("F4");
+            FirstEqA1.Text = sumX.ToString("F4");
+            FirstEqResult.Text = sumY.ToString("F4");
+
+            SecondEqA0.Text = sumX.ToString("F4");
+            SecondEqA1.Text = sumX2.ToString("F4");
+            SecondEqResult.Text = sumXY.ToString("F4");
 
             double r = sumXY / Math.Sqrt(sumX2 * sumY2);
 
@@ -135,6 +165,8 @@ namespace SortingApp
 
             double slope = sumXY / sumX2;
             double intercept = meanY - slope * meanX;
+            A0Result.Text = intercept.ToString("F4");
+            A1Result.Text = slope.ToString("F4");
 
             double mse = entries.Average(entry => Math.Pow(entry.TimeInMs - (slope * entry.ElementCount + intercept), 2));
 
